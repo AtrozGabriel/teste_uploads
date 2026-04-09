@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block conteudo %}
+
+<h2>Fotos Cadastradas</h2>
+<hr>
+
+{% for nome, foto in fotos %}
+    <div style="margin-bottom:20px;">
+        <strong>{{ nome }}</strong><br>
+        <img src="/{{ foto }}" width="200">
+    </div>
+{% endfor %}
+
+{% endblock %}
