@@ -24,16 +24,14 @@ ALLOWED_EXTENSIONS = {"png", "jpg", "jpeg", "gif"}
 
 def allowed_file(filename):
     return "." in filename and \
-           filename.rsplit(".", 1)[1].lower() in ALLOWED_EXTENSIONS
+        filename.rsplit(".", 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
-# 🏠 Página inicial
 @app.route("/")
 def index():
     return render_template("index.html")
 
 
-# 📤 Upload
 @app.route("/upload", methods=["GET", "POST"])
 def upload():
 
@@ -64,19 +62,36 @@ def upload():
     return render_template("upload.html")
 
 
-# 📋 Listagem
 @app.route("/listar")
 def listar():
+    pagina = request.args.get("page", 1, type=int)
+    limite = 12
+    offset = (pagina - 1) * limite
 
     conn = conectar()
     cursor = conn.cursor()
-    cursor.execute("SELECT nome, foto FROM teste_fotos ORDER BY id DESC")
+
+    cursor.execute(
+        "SELECT nome, foto FROM teste_fotos ORDER BY id DESC LIMIT %s OFFSET %s",
+        (limite, offset)
+    )
     fotos = cursor.fetchall()
+
+    cursor.execute("SELECT COUNT(*) FROM teste_fotos")
+    total = cursor.fetchone()[0]
+
     cursor.close()
     conn.close()
 
-    return render_template("listar.html", fotos=fotos)
+    total_paginas = (total // limite) + (1 if total % limite > 0 else 0)
+
+    return render_template(
+        "listar.html",
+        fotos=fotos,
+        pagina=pagina,
+        total_paginas=total_paginas
+    )
 
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)

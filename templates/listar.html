@@ -3,13 +3,36 @@
 {% block conteudo %}
 
 <h2>Fotos Cadastradas</h2>
+
+<a href="/"><button>⬅ Voltar</button></a>
+
 <hr>
 
-{% for nome, foto in fotos %}
-    <div style="margin-bottom:20px;">
-        <strong>{{ nome }}</strong><br>
-        <img src="/{{ foto }}" width="200">
-    </div>
-{% endfor %}
+<div class="grid">
+    {% for nome, foto in fotos %}
+        <div class="card">
+            <img src="/{{ foto }}">
+            <p>{{ nome }}</p>
+        </div>
+    {% endfor %}
+</div>
+
+<div class="paginacao">
+
+    {% if pagina > 1 %}
+        <a href="/listar?page={{ pagina - 1 }}">
+            <button>Anterior</button>
+        </a>
+    {% endif %}
+
+    Página {{ pagina }} de {{ total_paginas }}
+
+    {% if pagina < total_paginas %}
+        <a href="/listar?page={{ pagina + 1 }}">
+            <button>Próxima</button>
+        </a>
+    {% endif %}
+
+</div>
 
 {% endblock %}
