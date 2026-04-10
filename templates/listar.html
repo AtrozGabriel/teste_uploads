@@ -11,7 +11,7 @@
 <div class="grid">
     {% for nome, foto in fotos %}
         <div class="card">
-            <img src="/{{ foto }}">
+            <img src="{{ url_for('static', filename=foto) }}">
             <p>{{ nome }}</p>
         </div>
     {% endfor %}

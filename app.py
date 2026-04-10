@@ -44,8 +44,8 @@ def upload():
             extensao = foto.filename.rsplit(".", 1)[1].lower()
             novo_nome = f"{uuid4().hex}.{extensao}"
 
-            caminho = os.path.join(app.config["UPLOAD_FOLDER"], novo_nome)
-            foto.save(caminho)
+            caminho = f"uploads/{novo_nome}"
+            foto.save(os.path.join("static", caminho))
 
             conn = conectar()
             cursor = conn.cursor()
