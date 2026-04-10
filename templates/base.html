@@ -19,7 +19,7 @@
         }
 
         .container {
-            width: 80%;
+            width: 90%;
             margin: 30px auto;
             background: white;
             padding: 20px;
@@ -45,26 +45,36 @@
             margin-bottom: 10px;
         }
 
+        /* 🔥 GRID RESPONSIVO */
         .grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
             gap: 15px;
         }
 
+        /* 🔥 CARD ESTILO INSTAGRAM */
         .card {
-            background: #f9fafb;
-            padding: 10px;
-            border-radius: 8px;
-            text-align: center;
-            height: 260px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-}
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .card:hover {
+            transform: scale(1.03);
+        }
+
         .card img {
             width: 100%;
-            height: auto;
+            height: 220px;
             object-fit: cover;
+        }
+
+        .card p {
+            margin: 10px;
+            font-size: 14px;
+            word-break: break-word;
         }
 
         .paginacao {
@@ -75,8 +85,39 @@
         a {
             text-decoration: none;
         }
+
+        /* 🔥 MODAL */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 999;
+            padding-top: 50px;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+        }
+
+        .modal img {
+            display: block;
+            margin: auto;
+            max-width: 90%;
+            max-height: 80%;
+            border-radius: 10px;
+        }
+
+        .modal span {
+            position: absolute;
+            top: 20px;
+            right: 40px;
+            color: white;
+            font-size: 35px;
+            cursor: pointer;
+        }
     </style>
 </head>
+
 <body>
 
 <header>Teste</header>

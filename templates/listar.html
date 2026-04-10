@@ -10,7 +10,7 @@
 
 <div class="grid">
     {% for nome, foto in fotos %}
-        <div class="card">
+        <div class="card" onclick="abrirModal('{{ foto }}')">
             <img src="{{ foto }}">
             <p>{{ nome }}</p>
         </div>
@@ -34,5 +34,30 @@
     {% endif %}
 
 </div>
+
+<!-- 🔥 MODAL -->
+<div id="modal" class="modal">
+    <span onclick="fecharModal()">&times;</span>
+    <img id="imagemModal">
+</div>
+
+<!-- 🔥 SCRIPT -->
+<script>
+function abrirModal(src) {
+    document.getElementById("modal").style.display = "block";
+    document.getElementById("imagemModal").src = src;
+}
+
+function fecharModal() {
+    document.getElementById("modal").style.display = "none";
+}
+
+window.onclick = function(event) {
+    let modal = document.getElementById("modal");
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+</script>
 
 {% endblock %}
